@@ -1,5 +1,6 @@
 #!/usr/bin/haxe
 -cp src
+-cp tests
 -main com.er453r.hxtave.Test
--js hxtave.js
--cmd nodejs hxtave.js
+-js build/hxtave.js
+-cmd nodejs build/hxtave.js
