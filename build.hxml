@@ -1,0 +1,4 @@
+#!/usr/bin/haxe
+-cp src
+-main com.er453r.hxtave.Test
+-js hxtave.js
