@@ -1,5 +1,6 @@
 package com.er453r.hxtave;
 
+import sys.FileSystem;
 import sys.io.File;
 import haxe.macro.Context;
 
@@ -29,5 +30,18 @@ class MacroUtils {
 
 	static public function getFileContent(fileName:String):String {
 		return File.getContent(Context.resolvePath(getContextPath(fileName)));
+	}
+
+	static public function recursiveLoop(path:String, handler:String->Void){
+		if (FileSystem.exists(path)){
+			for(file in FileSystem.readDirectory(path)){
+				var path = path + "/" + file;
+
+				if(FileSystem.isDirectory(path))
+					recursiveLoop(path + "/", handler)
+				else
+					handler(path);
+			}
+		}
 	}
 }
