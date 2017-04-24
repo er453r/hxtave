@@ -1,12 +1,15 @@
 package com.er453r.hxtave;
 
+import haxe.unit.TestRunner;
+
 @:build(com.er453r.hxtave.TestBuilder.build())
 class Test{
 	public static function main(){
-		new Test();
-	}
+		var testRunner = new TestRunner();
 
-	public function new(){
-		new TestUtils();
+		for(key in tests.keys())
+			testRunner.add(new ScriptTest(key, tests.get(key)));
+
+		testRunner.run();
 	}
 }

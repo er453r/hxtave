@@ -28,8 +28,12 @@ class MacroUtils {
 		return exists;
 	}
 
-	static public function getFileContent(fileName:String):String {
+	static public function getContextFileContent(fileName:String):String {
 		return File.getContent(Context.resolvePath(getContextPath(fileName)));
+	}
+
+	static public function getFileContent(fileName:String):String {
+		return File.getContent(fileName);
 	}
 
 	static public function recursiveLoop(path:String, handler:String->Void){
