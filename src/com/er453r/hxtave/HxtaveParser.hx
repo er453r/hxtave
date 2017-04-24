@@ -1,5 +1,6 @@
 package com.er453r.hxtave;
 
+import com.er453r.hxtave.tokens.Semicolon;
 import com.er453r.hxtave.tokens.Multiply;
 import com.er453r.hxtave.tokens.Add;
 import com.er453r.hxtave.tokens.Whitespace;
@@ -12,7 +13,8 @@ class HxtaveParser extends Parser{
 			new Constant(),
 			new Whitespace(),
 			new Add(),
-			new Multiply()
+			new Multiply(),
+			new Semicolon()
 		]);
 	}
 }

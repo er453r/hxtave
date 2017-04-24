@@ -3,6 +3,8 @@ package com.er453r.parser;
 import EReg;
 
 class Parser {
+	private static inline var NEW_LINE:String = "\n";
+
 	private var tokens:Array<Token>;
 
 	public function new(tokens:Array<Token> ){
@@ -10,18 +12,30 @@ class Parser {
 	}
 
 	public function parse(statement:String){
-		var currentPosition:UInt = 0;
+		var position:UInt = 0;
+		var column:UInt = 1;
+		var line:UInt = 1;
 
-		while(currentPosition < statement.length){
+		while(position < statement.length){
 			var found:Bool = false;
 
 			for(token in tokens){
 				var regex:EReg = new EReg(token.regEx(), "");
 
-				if(regex.matchSub(statement, currentPosition) && regex.matchedLeft().length == currentPosition){
+				if(regex.matchSub(statement, position) && regex.matchedLeft().length == position){
 					var match:String = regex.matched(0);
 
-					currentPosition += match.length;
+					// update position over lines
+					var newLinePosition:Int = match.indexOf(NEW_LINE);
+
+					if(newLinePosition > -1){
+						line++;
+						column = match.length - newLinePosition;
+					}
+					else
+						column += match.length;
+
+					position += match.length;
 
 					found = true;
 
@@ -30,7 +44,7 @@ class Parser {
 			}
 
 			if(!found)
-				throw new LexerError('Unknown character: "${statement.substr(currentPosition, 1)}"', currentPosition, 1);
+				throw new LexerError('Unknown character: "${statement.substr(position, 1)}"', column, line);
 		}
 	}
 }
