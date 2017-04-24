@@ -1,0 +1,17 @@
+#!/usr/bin/haxe
+-cp src
+-cp tests
+-main com.er453r.hxtave.Test
+
+--each
+
+# javascript
+-js build/hxtave.js
+-cmd echo "js tests\n"
+-cmd nodejs build/hxtave.js
+--next
+
+# neko
+-neko build/hxtave.n
+-cmd echo "\nneko tests\n"
+-cmd neko build/hxtave.n

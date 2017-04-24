@@ -1,5 +1,6 @@
 package com.er453r.hxtave;
 
+import com.er453r.parser.Parser;
 import haxe.unit.TestCase;
 
 class ScriptTest extends TestCase{
@@ -14,6 +15,13 @@ class ScriptTest extends TestCase{
 	}
 
 	public function testScript() {
-		Math.random() > 0.1 ? assertEquals("A", "A") : assertEquals("A", "B");
+		print('Script ${name} ');
+
+		var parser:Parser = new Parser();
+
+		parser.parse(this.test);
+
+		// if the parser does not throw an exception - OK
+		assertTrue(true);
 	}
 }
