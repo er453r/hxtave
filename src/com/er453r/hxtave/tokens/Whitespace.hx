@@ -10,4 +10,8 @@ class Whitespace implements Token{
 	public function regEx(){
 		return WHITESPACE_REGEX;
 	}
+
+	public function getInstance(statement:String):Token{
+		return new Whitespace();
+	}
 }

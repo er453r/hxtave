@@ -10,4 +10,8 @@ class Semicolon implements Token{
 	public function regEx(){
 		return SEMICOLON_REGEX;
 	}
+
+	public function getInstance(statement:String):Token{
+		return new Semicolon();
+	}
 }

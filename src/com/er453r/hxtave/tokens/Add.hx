@@ -10,4 +10,8 @@ class Add implements Token{
 	public function regEx(){
 		return ADD_REGEX;
 	}
+
+	public function getInstance(statement:String):Token{
+		return new Add();
+	}
 }

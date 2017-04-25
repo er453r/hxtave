@@ -10,4 +10,8 @@ class Multiply implements Token{
 	public function regEx(){
 		return MULTIPLY_REGEX;
 	}
+
+	public function getInstance(statement:String):Token{
+		return new Multiply();
+	}
 }

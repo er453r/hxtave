@@ -2,13 +2,17 @@ package com.er453r.parser;
 
 import EReg;
 
+import com.er453r.parser.Token;
+
 class Parser {
 	private static inline var NEW_LINE:String = "\n";
 
 	private var tokens:Array<Token>;
+	private var tokenConsumer:TokenConsumer;
 
-	public function new(tokens:Array<Token> ){
+	public function new(tokens:Array<Token>, tokenConsumer:TokenConsumer){
 		this.tokens = tokens;
+		this.tokenConsumer = tokenConsumer;
 	}
 
 	public function parse(statement:String){
@@ -24,6 +28,8 @@ class Parser {
 
 				if(regex.matchSub(statement, position) && regex.matchedLeft().length == position){
 					var match:String = regex.matched(0);
+
+					tokenConsumer.addToken(token.getInstance(match));
 
 					// update position over lines
 					var newLinePosition:Int = match.indexOf(NEW_LINE);
@@ -44,7 +50,7 @@ class Parser {
 			}
 
 			if(!found)
-				throw new LexerError('Unknown character: "${statement.substr(position, 1)}"', column, line);
+				throw new ParserException('Unknown character: "${statement.substr(position, 8)}"', column, line);
 		}
 	}
 }

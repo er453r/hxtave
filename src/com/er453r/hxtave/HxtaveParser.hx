@@ -15,6 +15,6 @@ class HxtaveParser extends Parser{
 			new Add(),
 			new Multiply(),
 			new Semicolon()
-		]);
+		], new HxtaveBranch());
 	}
 }

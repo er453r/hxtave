@@ -10,4 +10,8 @@ class Constant implements Token{
 	public function regEx(){
 		return INTEGER_REGEX;
 	}
+
+	public function getInstance(statement:String):Token{
+		return new Constant();
+	}
 }

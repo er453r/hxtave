@@ -1,6 +1,6 @@
 package com.er453r.parser;
 
-class LexerError {
+class ParserException {
 	public var message:String;
 	public var column:UInt;
 	public var line:UInt;

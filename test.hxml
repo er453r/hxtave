@@ -12,6 +12,6 @@
 --next
 
 # neko
--neko build/hxtave.n
--cmd echo "\nneko tests\n"
--cmd neko build/hxtave.n
+#-neko build/hxtave.n
+#-cmd echo "\nneko tests\n"
+#-cmd neko build/hxtave.n
