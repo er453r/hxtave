@@ -29,7 +29,12 @@ class Parser {
 				if(regex.matchSub(statement, position) && regex.matchedLeft().length == position){
 					var match:String = regex.matched(0);
 
-					tokenConsumer.addToken(token.getInstance(match));
+					try{
+						tokenConsumer.addToken(token.getInstance(match));
+					}
+					catch(error:String){
+						throw new ParserException(error +  ': "${statement.substr(position, 8)}"', column, line);
+					}
 
 					// update position over lines
 					var newLinePosition:Int = match.indexOf(NEW_LINE);

@@ -2,7 +2,7 @@ package com.er453r.hxtave.tokens;
 
 import com.er453r.parser.Token;
 
-class Constant implements Token{
+class Constant implements Token implements Node{
 	private static var INTEGER_REGEX:String = "\\d+";
 
 	private var variable:Variable;
@@ -18,5 +18,9 @@ class Constant implements Token{
 
 	public function getInstance(statement:String):Token{
 		return new Constant(statement);
+	}
+
+	public function value(context:Context):Variable{
+		return variable;
 	}
 }

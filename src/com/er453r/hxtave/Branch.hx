@@ -1,9 +1,10 @@
 package com.er453r.hxtave;
 
+import com.er453r.hxtave.tokens.Space;
 import Type;
 import com.er453r.utils.Log;
 import com.er453r.hxtave.tokens.Semicolon;
-import com.er453r.hxtave.tokens.Whitespace;
+import com.er453r.hxtave.tokens.Newline;
 import Array;
 import com.er453r.parser.Token;
 import com.er453r.parser.TokenConsumer;
@@ -15,14 +16,14 @@ class Branch implements TokenConsumer {
 	public function new(){}
 
 	public function addToken(token:Token){
-		if(Std.is(token, Whitespace)){
+		if(Std.is(token, Space)){
 			Log.debug("Ignoring whitespace");
 
 			return;
 		}
 
-		if(Std.is(token, Semicolon)){
-			Log.debug("Semicolon terminates existing expression");
+		if(Std.is(token, Semicolon) || Std.is(token, Newline)){
+			Log.debug("Semicolon/new line terminates existing expression");
 
 			if(this.token != null)
 				tokens.push(this.token);
@@ -43,7 +44,7 @@ class Branch implements TokenConsumer {
 		}
 
 		if(this.token == null){
-			Log.debug("Addding BinaryOperator token");
+			Log.debug("Addding constant token");
 
 			this.token = token;
 
