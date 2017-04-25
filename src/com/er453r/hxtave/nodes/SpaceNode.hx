@@ -1,8 +1,8 @@
-package com.er453r.hxtave.tokens;
+package com.er453r.hxtave.nodes;
 
-import com.er453r.parser.Token;
+import com.er453r.parser.prototypes.Token;
 
-class Space implements Token{
+class SpaceNode implements Token{
 	private static var SPACE_REGEX:String = " ";
 
 	public function new(){}
@@ -12,6 +12,6 @@ class Space implements Token{
 	}
 
 	public function getInstance(statement:String):Token{
-		return new Space();
+		return new SpaceNode();
 	}
 }

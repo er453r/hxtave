@@ -2,7 +2,8 @@ package com.er453r.parser;
 
 import EReg;
 
-import com.er453r.parser.Token;
+import com.er453r.parser.prototypes.Token;
+import com.er453r.parser.prototypes.TokenConsumer;
 
 class Parser {
 	private static inline var NEW_LINE:String = "\n";

@@ -1,9 +1,10 @@
-package com.er453r.hxtave.tokens;
+package com.er453r.hxtave.nodes;
 
-import com.er453r.parser.TokenConsumer;
-import com.er453r.parser.Token;
+import com.er453r.hxtave.prototypes.Node;
+import com.er453r.parser.prototypes.TokenConsumer;
+import com.er453r.parser.prototypes.Token;
 
-class BinaryOperator implements Token implements TokenConsumer{
+class BinaryOperatorNode implements Token implements TokenConsumer{
 	private static var ADD_REGEX:String = "[\\+\\*]";
 
 	private var statement:String;
@@ -27,7 +28,7 @@ class BinaryOperator implements Token implements TokenConsumer{
 	}
 
 	public function getInstance(statement:String):Token{
-		return new BinaryOperator(statement);
+		return new BinaryOperatorNode(statement);
 	}
 
 	public function addToken(token:Token){

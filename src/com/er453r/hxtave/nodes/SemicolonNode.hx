@@ -1,8 +1,8 @@
-package com.er453r.hxtave.tokens;
+package com.er453r.hxtave.nodes;
 
-import com.er453r.parser.Token;
+import com.er453r.parser.prototypes.Token;
 
-class Semicolon implements Token{
+class SemicolonNode implements Token{
 	private static var SEMICOLON_REGEX:String = ";";
 
 	public function new(){}
@@ -12,6 +12,6 @@ class Semicolon implements Token{
 	}
 
 	public function getInstance(statement:String):Token{
-		return new Semicolon();
+		return new SemicolonNode();
 	}
 }

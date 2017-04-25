@@ -1,8 +1,8 @@
-package com.er453r.hxtave.tokens;
+package com.er453r.hxtave.nodes;
 
-import com.er453r.parser.Token;
+import com.er453r.parser.prototypes.Token;
 
-class Newline implements Token{
+class NewlineNode implements Token{
 	private static var NEWLINE_REGEX:String = "\n";
 
 	public function new(){}
@@ -12,6 +12,6 @@ class Newline implements Token{
 	}
 
 	public function getInstance(statement:String):Token{
-		return new Newline();
+		return new NewlineNode();
 	}
 }

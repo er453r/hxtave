@@ -1,13 +1,13 @@
 package com.er453r.hxtave;
 
-import com.er453r.hxtave.tokens.Space;
-import Type;
+import com.er453r.parser.prototypes.Token;
+import com.er453r.parser.prototypes.TokenConsumer;
+
+import com.er453r.hxtave.nodes.SpaceNode;
+import com.er453r.hxtave.nodes.SemicolonNode;
+import com.er453r.hxtave.nodes.NewlineNode;
+
 import com.er453r.utils.Log;
-import com.er453r.hxtave.tokens.Semicolon;
-import com.er453r.hxtave.tokens.Newline;
-import Array;
-import com.er453r.parser.Token;
-import com.er453r.parser.TokenConsumer;
 
 class Branch implements TokenConsumer {
 	private var token:Token;
@@ -16,14 +16,14 @@ class Branch implements TokenConsumer {
 	public function new(){}
 
 	public function addToken(token:Token){
-		if(Std.is(token, Space)){
+		if(Std.is(token, SpaceNode)){
 			Log.debug("Ignoring whitespace");
 
 			return;
 		}
 
-		if(Std.is(token, Semicolon) || Std.is(token, Newline)){
-			Log.debug("Semicolon/new line terminates existing expression");
+		if(Std.is(token, SemicolonNode) || Std.is(token, NewlineNode)){
+			Log.debug("SemicolonNode/BinaryOperatorNode line terminates existing expression");
 
 			if(this.token != null)
 				tokens.push(this.token);

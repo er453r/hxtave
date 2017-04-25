@@ -1,4 +1,4 @@
-package com.er453r.parser;
+package com.er453r.parser.prototypes;
 
 interface Token {
 	public function regEx():String;

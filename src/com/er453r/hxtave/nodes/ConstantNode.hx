@@ -1,8 +1,9 @@
-package com.er453r.hxtave.tokens;
+package com.er453r.hxtave.nodes;
 
-import com.er453r.parser.Token;
+import com.er453r.hxtave.prototypes.Node;
+import com.er453r.parser.prototypes.Token;
 
-class Constant implements Token implements Node{
+class ConstantNode implements Token implements Node{
 	private static var INTEGER_REGEX:String = "\\d+";
 
 	private var variable:Variable;
@@ -17,7 +18,7 @@ class Constant implements Token implements Node{
 	}
 
 	public function getInstance(statement:String):Token{
-		return new Constant(statement);
+		return new ConstantNode(statement);
 	}
 
 	public function value(context:Context):Variable{
