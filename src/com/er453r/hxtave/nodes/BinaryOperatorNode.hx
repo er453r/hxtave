@@ -32,6 +32,12 @@ class BinaryOperatorNode implements Token implements TokenConsumer{
 	}
 
 	public function addToken(token:Token){
+		if(left == null && token == null){
+			left = new ConstantNode("0"); // TODO - can be static
+
+			return;
+		}
+
 		if(!Std.is(token, Node))
 			throw "Binary operator expects a value node";
 
