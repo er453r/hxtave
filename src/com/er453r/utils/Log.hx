@@ -23,11 +23,13 @@ class Log {
 
 	public static inline function debug(message:String, ?pos : PosInfos){
 		if(level == LogLevel.DEBUG){
+			#if debug
 			var temp:Float = Date.now().getTime();
 			var diff:Float = temp - time;
 			time = temp;
 
 			logTrace('${DateTools.format(Date.now(), '%H:%m:%S')} [DEBUG] ${pos.fileName}:${pos.lineNumber} (${pos.methodName}) ${message} (dt: ${diff} ms.)');
+			#end
 		}
 	}
 
