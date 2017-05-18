@@ -1,5 +1,7 @@
 package com.er453r.hxtave;
 
+import com.er453r.parser.EOFToken;
+import com.er453r.hxtave.nodes.ConstantNode;
 import com.er453r.parser.prototypes.Token;
 import com.er453r.parser.prototypes.TokenConsumer;
 
@@ -10,10 +12,14 @@ import com.er453r.hxtave.nodes.NewlineNode;
 import com.er453r.utils.Log;
 
 class Branch implements TokenConsumer {
-	private var token:Token;
 	private var tokens:Array<Token> = [];
+	private var token:Token;
 
 	public function new(){}
+
+	private function name(token:Token):String{
+		return Type.getClassName(Type.getClass(token)).split(".").pop();
+	}
 
 	public function addToken(token:Token){
 		if(Std.is(token, SpaceNode)){
@@ -22,8 +28,10 @@ class Branch implements TokenConsumer {
 			return;
 		}
 
-		if(Std.is(token, SemicolonNode) || Std.is(token, NewlineNode)){
-			Log.debug("SemicolonNode/BinaryOperatorNode line terminates existing expression");
+		Log.debug('New ${name(token)}} appeared');
+
+		if(Std.is(token, SemicolonNode) || Std.is(token, NewlineNode) || Std.is(token, EOFToken)){
+			Log.debug("Semicolon/new line/EOF terminates existing expression");
 
 			if(this.token != null)
 				tokens.push(this.token);
@@ -44,7 +52,7 @@ class Branch implements TokenConsumer {
 		}
 
 		if(this.token == null){
-			Log.debug("Addding constant token");
+			Log.debug("Addding token");
 
 			this.token = token;
 
@@ -60,5 +68,17 @@ class Branch implements TokenConsumer {
 		}
 
 		throw "Do not know what to do with" + Type.typeof(token);
+	}
+
+	public function run(context:Context){
+		Log.debug('Running ${tokens.length} tokens');
+
+		for(token in tokens){
+			Log.debug('Running ${name(token)}}');
+
+			if(Std.is(token, ConstantNode)){
+				cast(token, ConstantNode).value(context);
+			}
+		}
 	}
 }

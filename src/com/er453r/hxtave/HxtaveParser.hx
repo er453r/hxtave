@@ -8,6 +8,8 @@ import com.er453r.hxtave.nodes.ConstantNode;
 import com.er453r.parser.Parser;
 
 class HxtaveParser extends Parser{
+	private var mainBranch:Branch = new Branch();
+
 	public function new() {
 		super([
 			new ConstantNode(),
@@ -15,6 +17,10 @@ class HxtaveParser extends Parser{
 			new SpaceNode(),
 			new BinaryOperatorNode(),
 			new SemicolonNode()
-		], new Branch());
+		], mainBranch);
+	}
+
+	public function run(){
+		mainBranch.run(new Context());
 	}
 }

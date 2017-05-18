@@ -1,7 +1,7 @@
 package com.er453r.hxtave;
 
 import com.er453r.hxtave.HxtaveParser;
-import com.er453r.parser.Parser;
+import com.er453r.utils.Log;
 import haxe.unit.TestCase;
 
 class ScriptTest extends TestCase{
@@ -18,9 +18,13 @@ class ScriptTest extends TestCase{
 	public function testScript() {
 		print('Script ${name} ');
 
-		var parser:Parser = new HxtaveParser();
+		var parser:HxtaveParser = new HxtaveParser();
+
+		Log.debug('\nScript contents:\n\n${this.test}\n\n');
 
 		parser.parse(this.test);
+
+		parser.run();
 
 		// if the parser does not throw an exception - OK
 		assertTrue(true);

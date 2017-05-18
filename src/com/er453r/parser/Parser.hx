@@ -1,5 +1,6 @@
 package com.er453r.parser;
 
+import com.er453r.parser.EOFToken;
 import EReg;
 
 import com.er453r.parser.prototypes.Token;
@@ -58,5 +59,7 @@ class Parser {
 			if(!found)
 				throw new ParserException('Unknown character: "${statement.substr(position, 8)}"', column, line);
 		}
+
+		tokenConsumer.addToken(new EOFToken());
 	}
 }
