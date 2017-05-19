@@ -1,8 +1,6 @@
 package com.er453r.parser;
 
 import com.er453r.parser.EOFToken;
-import EReg;
-
 import com.er453r.parser.prototypes.Token;
 import com.er453r.parser.prototypes.TokenConsumer;
 
