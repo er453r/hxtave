@@ -1,14 +1,14 @@
 package com.er453r.hxtave.nodes;
 
+import com.er453r.hxtave.prototypes.Node;
+import com.er453r.hxtave.prototypes.NodeBase;
 import com.er453r.parser.prototypes.Token;
 
-class SemicolonNode implements Token{
-	private static var SEMICOLON_REGEX:String = ";";
+class SemicolonNode extends NodeBase implements Token implements Node{
+	private static inline var SEMICOLON_REGEX:String = ";";
 
-	public function new(){}
-
-	public function regEx(){
-		return SEMICOLON_REGEX;
+	public function new(){
+		super(SEMICOLON_REGEX);
 	}
 
 	public function getInstance(statement:String):Token{

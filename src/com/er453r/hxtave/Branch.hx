@@ -1,5 +1,6 @@
 package com.er453r.hxtave;
 
+import com.er453r.hxtave.prototypes.Node;
 import com.er453r.parser.EOFToken;
 import com.er453r.hxtave.nodes.ConstantNode;
 import com.er453r.parser.prototypes.Token;
@@ -12,8 +13,8 @@ import com.er453r.hxtave.nodes.NewlineNode;
 import com.er453r.utils.Log;
 
 class Branch implements TokenConsumer {
-	private var tokens:Array<Token> = [];
-	private var token:Token;
+	private var nodes:Array<Node> = [];
+	private var node:Node;
 
 	public function new(){}
 
@@ -21,64 +22,65 @@ class Branch implements TokenConsumer {
 		return Type.getClassName(Type.getClass(token)).split(".").pop();
 	}
 
+
 	public function addToken(token:Token){
-		if(Std.is(token, SpaceNode)){
+		addNode(cast token);
+	}
+
+	public function addNode(node:Node){
+		if(Std.is(node, SpaceNode)){
 			Log.debug("Ignoring whitespace");
 
 			return;
 		}
 
-		Log.debug('New ${name(token)}} appeared');
+		Log.debug('New ${name(node)}} appeared');
 
-		if(Std.is(token, SemicolonNode) || Std.is(token, NewlineNode) || Std.is(token, EOFToken)){
+		if(Std.is(node, SemicolonNode) || Std.is(node, NewlineNode) || Std.is(node, EOFToken)){
 			Log.debug("Semicolon/new line/EOF terminates existing expression");
 
-			if(this.token != null)
-				tokens.push(this.token);
+			if(this.node != null)
+				nodes.push(this.node);
 
-			this.token = null;
+			this.node = null;
 
 			return;
 		}
 
-		if(Std.is(token, TokenConsumer)){
+		if(node.acceptsNodes()){
 			Log.debug("New consumer appeared");
 
-			cast(token, TokenConsumer).addToken(this.token);
+			node.addNode(this.node);
 
-			this.token = token;
-
-			return;
-		}
-
-		if(this.token == null){
-			Log.debug("Addding token");
-
-			this.token = token;
+			this.node = node;
 
 			return;
 		}
 
-		if(Std.is(this.token, TokenConsumer)){
+		if(this.node == null){
+			Log.debug("Addding node");
+
+			this.node = node;
+
+			return;
+		}
+
+		if(this.node.acceptsNodes()){
 			Log.debug("Adding to existing consumer");
 
-			cast(this.token, TokenConsumer).addToken(token);
+			this.node.addNode(node);
 
 			return;
 		}
 
-		throw "Do not know what to do with" + Type.typeof(token);
+		throw "Do not know what to do with" + Type.typeof(node);
 	}
 
 	public function run(context:Context){
-		Log.debug('Running ${tokens.length} tokens');
+		Log.debug('Running ${nodes.length} nodes');
 
-		for(token in tokens){
-			Log.debug('Running ${name(token)}}');
-
-			if(Std.is(token, ConstantNode)){
-				cast(token, ConstantNode).value(context);
-			}
+		for(node in nodes){
+			Log.debug('Running ${name(node)}}');
 		}
 	}
 }
