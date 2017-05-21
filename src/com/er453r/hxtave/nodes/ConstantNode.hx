@@ -1,10 +1,9 @@
 package com.er453r.hxtave.nodes;
 
 import com.er453r.hxtave.prototypes.NodeBase;
-import com.er453r.hxtave.prototypes.Node;
 import com.er453r.parser.prototypes.Token;
 
-class ConstantNode extends NodeBase implements Token implements Node{
+class ConstantNode extends NodeBase{
 	private static inline var INTEGER_REGEX:String = "\\d+";
 
 	private var variable:Variable;
@@ -15,7 +14,7 @@ class ConstantNode extends NodeBase implements Token implements Node{
 		variable = new Variable(Std.parseFloat(statement));
 	}
 
-	public function getInstance(statement:String):Token{
+	override public function getInstance(statement:String):Token{
 		return new ConstantNode(statement);
 	}
 

@@ -1,6 +1,8 @@
 package com.er453r.hxtave.prototypes;
 
-class NodeBase {
+import com.er453r.parser.prototypes.Token;
+
+class NodeBase implements Token implements Node{
 	private var _regEx:String;
 	private var _acceptsNodes:Bool;
 	private var _hasValue:Bool;
@@ -27,5 +29,9 @@ class NodeBase {
 
 	public function regEx():String{
 		return _regEx;
+	}
+
+	public function getInstance(statement:String):Token{
+		return null;
 	}
 }

@@ -4,7 +4,7 @@ import com.er453r.hxtave.prototypes.NodeBase;
 import com.er453r.hxtave.prototypes.Node;
 import com.er453r.parser.prototypes.Token;
 
-class BinaryOperatorNode extends NodeBase implements Token implements Node{
+class BinaryOperatorNode extends NodeBase{
 	private static inline var ADD_REGEX:String = "[\\+\\*]";
 
 	private var statement:String;
@@ -18,7 +18,7 @@ class BinaryOperatorNode extends NodeBase implements Token implements Node{
 		this.statement = statement;
 	}
 
-	public function getInstance(statement:String):Token{
+	override public function getInstance(statement:String):Token{
 		return new BinaryOperatorNode(statement);
 	}
 
